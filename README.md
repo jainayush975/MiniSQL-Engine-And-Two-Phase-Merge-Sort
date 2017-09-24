@@ -1,10 +1,11 @@
-# MiniSql-Engine
+# MiniSql-Engine And Two Phase Merge Sort
 Mini​ sql engine which will run a subset of SQL Queries using ​ command line interface​.
+
 
 ## Type of Queries:​​
 1. Select all records :
 ```sql
-	> select * from table_name;
+	select * from table_name;
 ```
 2. Aggregate functions: Simple aggregate functions on a single column. Sum, average, max and min. They will be very trivial given that the data is only numbers.
 ```sql
@@ -27,3 +28,6 @@ condition :
 > Select * from table1, table2 where table1.col1=table2.col2;
 > Select col1,col2 from table1,table2 where table1.col1=table2.col2;
 ```
+## Two Phase Merge Sort
+
+Repository also contains two phase merge sort which is used for sorting data more than the size of Main memory. Instruction for running the sort are provided in pdf inside sort's folder.
