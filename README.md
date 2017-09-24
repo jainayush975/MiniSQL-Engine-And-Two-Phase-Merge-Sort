@@ -8,7 +8,7 @@ Mini​ sql engine which will run a subset of SQL Queries using ​ command line
 ```
 2. Aggregate functions: Simple aggregate functions on a single column. Sum, average, max and min. They will be very trivial given that the data is only numbers.
 ```sql
-	Select max(col1) from table1;
+	Select MAX(col1) from table1;
 ```
 3. Project Columns(could be any number of columns) from one or more tables :
 ```sql

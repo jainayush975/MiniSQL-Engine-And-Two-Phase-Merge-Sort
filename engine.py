@@ -6,7 +6,11 @@ from database import Database, Table
 db = Database("comp","metadata.txt")
 
 def joinTable(from_tables):
-    if len(from_tables)>1:
+    for table in from_tables:
+        if table not in db.tables:
+            print "Error:", table, " does not exist"
+            exit()
+    if len(from_tables)==2:
         obj1 = db.tables[from_tables[0]]
         obj2 = db.tables[from_tables[1]]
         columns = (obj1.columns)+(obj2.columns)
@@ -19,7 +23,7 @@ def joinTable(from_tables):
     elif len(from_tables) == 1:
         obj3 = db.tables[from_tables[0]]
     else:
-        print "This Engine Don't support operation on more than 2 tables"
+        print "Error: This Engine Don't support operation on more than 2 tables"
         exit()
     return obj3
 
@@ -158,15 +162,16 @@ def handelWhere(data_table, command):
             data_table.data = finaldata
 
     elif len(command) == 2:
-        tbls = re.split(r'[=.]+',command[1])
+        tbls = re.split(r'[=><.]+',command[1])
         obj=db.tables[tbls[0]]
         new_clm1 = obj.columns
         for clm in range(len(new_clm1)):
             new_clm1[clm] = tbls[0] + '.' + new_clm1[clm]
         obj=db.tables[tbls[2]]
         new_clm2 = obj.columns
-        for clm in range(len(new_clm2)):
-            new_clm2[clm] = tbls[2] + '.' + new_clm2[clm]
+        if tbls[0]!=tbls[2]:
+            for clm in range(len(new_clm2)):
+                new_clm2[clm] = tbls[2] + '.' + new_clm2[clm]
         data_table.columns = new_clm1 + new_clm2
         finaldata = data_table.data
         data_table.data = formNewData1(data_table, command[1], finaldata)
